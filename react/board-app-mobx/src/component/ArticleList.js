@@ -6,23 +6,23 @@ import Modal from "./Modal";
 
 const ArticleList = (props) => {
     const { article, setArticle } = props;
-    const [time, setTime] = useState("");
     const [openModal, setOpenModal] = useState(false);
-    const { articleStore } = useStore();
+    const { articleListStore, saveInfoStore } = useStore();
     useEffect(() => {
-        setTime(new Date().toLocaleTimeString());
-        setInterval(() => setTime(new Date().toLocaleTimeString()), 1000);
-        // console.log(articleStore.articles[0].title);
-    }, []);
+        saveInfoStore.setDate(new Date().toLocaleTimeString());
+        setInterval(() => saveInfoStore.setDate(new Date().toLocaleTimeString()), 1000);
+    }, [saveInfoStore]);
+    const userNameChangeHandler = (e) => {
+        saveInfoStore.setAuthor(e.target.value);
+    };
     const createButtonClickHandler = () => {
         setOpenModal(!openModal);
     };
     const updateButtonClickHandler = () => {
-        articleStore.updateArticle(article);
+        articleListStore.updateArticle(article);
     };
     const deleteButtonClickHandler = () => {
-        console.log(article, articleStore);
-        articleStore.deleteArticle(article);
+        articleListStore.deleteArticle(article);
     };
     const rowClickHandler = (e) => {
         const { number, title, author, date, content } = e.data;
@@ -40,11 +40,11 @@ const ArticleList = (props) => {
                 <div className="article-list__header">
                     <div className="userInfo">
                         <label htmlFor="user">사용자</label>
-                        <input id="user" placeholder="ADMIN"></input>
+                        <input id="user" onChange={userNameChangeHandler} value={saveInfoStore.author} />
                     </div>
                     <div className="time">
                         <label htmlFor="time">현재시간</label>
-                        <input id="time" className="userInfo__time" value={time} readOnly></input>
+                        <input id="time" className="userInfo__time" value={saveInfoStore.date} readOnly></input>
                     </div>
                 </div>
                 <div className="board">
@@ -73,13 +73,13 @@ const ArticleList = (props) => {
                                 sortable: true,
                                 filter: true,
                             }}
-                            rowData={articleStore.articles}
+                            rowData={articleListStore.articleList}
                             onRowClicked={rowClickHandler}
                         />
                     </div>
                 </div>
             </section>
-            {openModal && <Modal setOpenModal={setOpenModal} article={article} setArticle={setArticle} />}
+            {openModal && <Modal setOpenModal={setOpenModal} author={saveInfoStore.author} />}
         </>
     ));
 };

@@ -4,7 +4,7 @@ import ArticleList from "./component/ArticleList";
 import Content from "./component/Content";
 
 function App() {
-    const [article, setArticle] = useState({ number: "", title: "", author: "", date: "", contente: "" });
+    const [article, setArticle] = useState({ number: "", title: "", author: "", date: "", content: "" });
     return (
         <>
             <h2>Board App 📋</h2>
