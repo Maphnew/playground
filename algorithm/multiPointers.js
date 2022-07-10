@@ -118,7 +118,7 @@ const isSub1 = isSubsequence("hello", "hello world"); // true
 const isSub2 = isSubsequence("sing", "sting"); // true
 const isSub3 = isSubsequence("abc", "abracadabra"); // true
 const isSub4 = isSubsequence("abc", "acb"); // false (order matters)
-// console.log(isSub1, isSub2, isSub3, isSub4);
+console.log("isSubsequence", isSub1, isSub2, isSub3, isSub4);
 
 // AT LEAST
 // Time Complexity - O(N + M)
@@ -136,3 +136,33 @@ function isSubsequence(str1, str2) {
   }
   return false;
 }
+
+// Colt's Solution
+
+function isSubsequence2(str1, str2) {
+  var i = 0;
+  var j = 0;
+  if (!str1) return true;
+  while (j < str2.length) {
+    if (str2[j] === str1[i]) i++;
+    if (i === str1.length) return true;
+    j++;
+  }
+  return false;
+}
+
+// Colt's Solution2 - O(1) 공간이 아닌 재귀
+
+function isSubsequence3(str1, str2) {
+  if (str1.length === 0) return true;
+  if (str2.length === 0) return false;
+  if (str2[0] === str1[0]) return isSubsequence3(str1.slice(1), str2.slice(1));
+  return isSubsequence3(str1, str2.slice(1));
+}
+
+const isSub31 = isSubsequence("hello", "hello world"); // true
+const isSub32 = isSubsequence("sing", "sting"); // true
+const isSub33 = isSubsequence("abc", "abracadabra"); // true
+const isSub34 = isSubsequence("abc", "acb"); // false (order matters)
+
+console.log("isSubsequence3", isSub31, isSub32, isSub33, isSub34);
