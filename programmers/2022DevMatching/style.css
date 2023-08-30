@@ -1,0 +1,26 @@
+body {
+    height: 100%;
+    width: 100%;
+    position: relative;
+    color: #333;
+    font-size: 20px;
+    margin: 0;
+    padding: 0;
+}
+.App {
+    margin: 10px;
+}
+.SelectedLanguage {
+    padding: 10px;
+}
+.SearchInput {
+    padding: 10px;
+}
+.SearchInput__input {
+    font-size: 15px;
+    width: 200px;
+    height: 50px;
+    cursor: pointer;
+    border-radius: 25px;
+    padding: 0 25px;
+}
